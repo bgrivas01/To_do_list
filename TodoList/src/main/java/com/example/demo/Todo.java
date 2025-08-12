@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Todo{
 
+    //makes it so an id is generated each and every tiime
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
