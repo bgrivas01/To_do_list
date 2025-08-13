@@ -22,12 +22,12 @@ public class TodoController {
         this.service = service;
     }
 
-    @GetMapping("/api/todo")
+    @GetMapping("/api/todos")
     public List<Todo> getAllTodos() {
         return service.getAllTodos();
     }
     
-    @PostMapping("path")
+    @PostMapping()
     public Todo createTodo(@RequestBody Map<String, String> body){
         return service.createTodo(body.get("title"));
     }

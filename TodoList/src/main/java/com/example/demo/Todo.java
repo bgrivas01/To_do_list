@@ -4,8 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "todo_list")
 public class Todo{
 
     //makes it so an id is generated each and every time a new todo item is added
@@ -20,6 +22,10 @@ public class Todo{
 
         this.title = title;
         this.completed = false; //so it always starts as incompleted 
+    }
+
+    public Todo(){
+
     }
 
     //getters & Setters -------------------
