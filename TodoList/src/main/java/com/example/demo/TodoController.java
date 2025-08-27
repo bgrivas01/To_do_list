@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -30,14 +30,25 @@ public class TodoController {
     public List<Todo> getAllTodos() {
         return service.getAllTodos();
     }
+
+    @GetMapping("/{id}")
+    public Todo getTodoById(@PathVariable Long id){
+        if(id<=0){
+            throw new IllegalArgumentException("Id Must be Positive");
+        }
+        return service.getTodoById(id);
+    }
     
     @PostMapping
-    public Todo createTodo(@RequestBody Map<String, String> body){
-        return service.createTodo(body.get("title"));
+    public Todo createTodo(@Valid @RequestBody TodoDTO todoDTO){
+        return service.createTodo(todoDTO.getTitle());
     }
 
     @DeleteMapping("/{id}")
     public void deleteTodo(@PathVariable Long id){
+        if(id<=0){
+            throw new IllegalArgumentException("Id must be positive");
+        }
         service.deleteTodo(id);
     }
 
@@ -46,10 +57,5 @@ public class TodoController {
         String title = (String) body.get("title");
         boolean completed = (Boolean) body.get("completed");
         return service.updateTodo(id, title, completed);
-        
     }
-
-    
-    
-
 }

@@ -18,6 +18,10 @@ public class TodoService{
         return repo.findAll();
     }
 
+    public Todo getTodoById(Long id){ 
+        return repo.getById(id);
+    }
+
     public Todo createTodo(String title){
         return repo.save(new Todo(title, false));
     }
