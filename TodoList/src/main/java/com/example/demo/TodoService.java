@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 public class TodoService{
 
     public final TodoRepository repo;
+    public final UserRepository userRepository;
 
-    public TodoService(TodoRepository repo){
+    public TodoService(TodoRepository repo, UserRepository userRepository){
         this.repo = repo;
+        this.userRepository = userRepository;
     }
     
     public List<Todo> getAllTodos(){
@@ -39,6 +41,15 @@ public class TodoService{
         return repo.save(todo);
         }
         throw new RuntimeException("Todo not found");
+    }
+
+     public Todo addTodoForUser(Long userId, String title) {
+        User user = userRepository.findById(userId).orElseThrow();
+        Todo todo = new Todo();
+        todo.setTitle(title);
+        todo.setCompleted(false);
+        todo.setUser(user);
+        return repo.save(todo);
     }
 
 }

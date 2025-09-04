@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,8 +22,10 @@ public class Todo{
     private String title;
     private boolean completed;
 
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
     public Todo(String title, boolean completed){
@@ -39,7 +43,7 @@ public class Todo{
         return id;
     }
 
-    public String gettitle(){
+    public String getTitle(){
         return title;
     }
     

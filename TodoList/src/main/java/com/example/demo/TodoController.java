@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.validation.Valid;
-
 
 @RestController
 @RequestMapping("/api/todos")
@@ -39,9 +37,9 @@ public class TodoController {
         return service.getTodoById(id);
     }
     
-    @PostMapping
-    public Todo createTodo(@Valid @RequestBody TodoDTO todoDTO){
-        return service.createTodo(todoDTO.getTitle());
+    @PostMapping("/{userId}")
+    public Todo addTodo(@PathVariable Long userId, @RequestBody Todo todoRequest) {
+        return service.addTodoForUser(userId, todoRequest.getTitle());
     }
 
     @DeleteMapping("/{id}")
